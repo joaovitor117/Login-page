@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Projetos/Login page/css/style.css">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="login">
+        <div class="usuario">
+            <label for="usr">Usuário</label>
+            <input type="text" placeholder="Digite seu usuario"  id="usr" name="usuario" autocomplete="username">
+        </div>
+        <div class="senha">
+            <label for="psw">Senha</label>
+            <input type="password" placeholder="Digite sua senha" id="psw" name="senha" autocomplete="current-password">
+        </div>
+        <div class="button"><input type="submit" value="Login"></div>
+    </form>
+
+    <!-- Mensagem de sucesso -->
+    <span id="successMsg" style="display: none; color: green; margin-top: 10px;">Login feito com sucesso!</span>
+
+    <!-- Mensagem de erro -->
+    <span id="erroMsg" style="display: none; color: red; margin-top: 10px;">Falha de autenticação, realize o login novamente</span>
+
+<!-- Script -->
+    <script>
+        const form = document.getElementById("login");
+        const usuario = document.getElementById("usr");
+        const senha = document.getElementById("psw");
+        const successMsg = document.getElementById("successMsg");
+        const erroMsg = document.getElementById("erroMsg")
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); //evita o envio real do formulario
+
+            // Verifica se os campos estão preenchidos corretamente
+            const usuarioValido = usuario.value.trim() !== "";
+            const senhaValida = senha.value.length >= 8;
+
+            if (usuarioValido && senhaValida) {
+                successMsg.style.display = "inline";
+                erroMsg.style.display = "none";
+                setTimeout (() => {
+            usuario.value = "";
+            senha.value = "";
+            successMsg.style.display = "none"
+            }, 6000); //limpa após 6 segundos
+            } else {
+                successMsg.style.display = "none";
+                erroMsg.style.display = "inline"; //Mostra a mensagem
+                setTimeout (() => {
+            usuario.value = "";
+            senha.value = "";
+            erroMsg.style.display = "none"
+            }, 3000); //limpa após 3 segundos
+            }
+        });
+    </script>
+</body>
+</html>
